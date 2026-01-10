@@ -1,12 +1,14 @@
 <script setup>
 import HelloWorld from './components/HelloWorld.vue'
+
 </script>
 
 <template>
+ 
   <div>
     <p>Gooner inventory</p>
   </div>
-  <HelloWorld />
+  <HelloWorld/>
 </template>
 
 <style scoped>
