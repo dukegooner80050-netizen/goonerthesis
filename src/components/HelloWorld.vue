@@ -1,31 +1,42 @@
 <template>
   <div>
-    <form @submit.prevent="addItem">
-      <input
-        v-model.trim="newItem.name"
-        placeholder="Item name"
-        required
-      />
-      <input
-        v-model.number="newItem.quantity"
-        type="number"
-        min="1"
-        placeholder="Qty"
-        required
-      />
+    <form @submit.prevent="addItem" class="row g-2 align-items-center mb-3">
+      <div class="col-md-5">
+        <input
+          class="form-control"
+          v-model.trim="newItem.name"
+          placeholder="Item name"
+          required
+        />
+      </div>
 
-      <!-- Status dropdown -->
-      <select v-model="newItem.status">
-        <option disabled value="">Select status</option>
-        <option v-for="s in statusOptions" :key="s" :value="s">
-          {{ s }}
-        </option>
-      </select>
+      <div class="col-md-2">
+        <input
+          class="form-control"
+          v-model.number="newItem.quantity"
+          type="number"
+          min="1"
+          placeholder="Qty"
+          required
+        />
+      </div>
 
-      <button type="submit">Add Item</button>
+      <div class="col-md-3">
+        <!-- Status dropdown -->
+        <select class="form-select" v-model="newItem.status">
+          <option disabled value="">Select status</option>
+          <option v-for="s in statusOptions" :key="s" :value="s">
+            {{ s }}
+          </option>
+        </select>
+      </div>
+
+      <div class="col-md-2">
+        <button class="btn btn-primary w-100" type="submit">Add Item</button>
+      </div>
     </form>
 
-    <table v-if="items.length">
+    <table v-if="items.length" class="table table-striped">
       <thead>
         <tr>
           <th>Name</th>
@@ -40,6 +51,7 @@
             <span v-if="!item.isEditingName">{{ item.name }}</span>
             <input
               v-else
+              class="form-control"
               v-model.trim="item.name"
               @keyup.enter="item.isEditingName = false"
               @blur="item.isEditingName = false"
@@ -48,6 +60,7 @@
 
           <td>
             <input
+              class="form-control"
               type="number"
               v-model.number="item.quantity"
               min="1"
@@ -55,7 +68,7 @@
           </td>
 
           <td>
-            <select v-model="item.status">
+            <select class="form-select" v-model="item.status">
               <option disabled value="">Select status</option>
               <option v-for="s in statusOptions" :key="s" :value="s">
                 {{ s }}
@@ -64,15 +77,17 @@
           </td>
 
           <td>
-            <div class="actions">
+            <div class="actions d-flex gap-2">
               <button
                 type="button"
+                class="btn btn-sm btn-outline-primary"
                 @click="item.isEditingName = !item.isEditingName"
               >
                 {{ item.isEditingName ? 'Save' : 'Edit' }}
               </button>
               <button
                 type="button"
+                class="btn btn-sm btn-outline-danger"
                 @click="removeItem(index)"
               >
                 Delete

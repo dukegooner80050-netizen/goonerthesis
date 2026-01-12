@@ -1,14 +1,17 @@
 <script setup>
 import HelloWorld from './components/HelloWorld.vue'
-
+import Nav from './components/Nav.vue'
 </script>
 
 <template>
- 
-  <div>
-    <p>Gooner inventory</p>
+  
+  <div class="container-fluid p-4" bg-light>
+    <Nav/>
+    <main class="container mt-4">
+      <HelloWorld/>
+    </main>
   </div>
-  <HelloWorld/>
+  
 </template>
 
 <style scoped>
