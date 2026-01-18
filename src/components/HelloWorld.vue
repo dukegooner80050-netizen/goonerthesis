@@ -32,6 +32,11 @@ const items = ref([])
 const search = ref('')
 const showModal = ref(false)
 const isEditing = ref(false)
+/* STATE */
+const items = ref([])
+const search = ref('')
+const showModal = ref(false)
+const isEditing = ref(false)
 
 const form = ref({
   id: null,
@@ -75,6 +80,8 @@ onUnmounted(() => {
 watch(
   items,
   (val) => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(val))
+    renderChart()
     localStorage.setItem(STORAGE_KEY, JSON.stringify(val))
     renderChart()
   },
@@ -350,7 +357,20 @@ function deleteItem(id) {
   position: fixed;
   inset: 0;
   background: rgba(0,0,0,0.5);
+.modal-backdrop-custom {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
   display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-card {
+  background: #fff;
+  padding: 1rem;
+  width: 320px;
+  border-radius: 8px;
   align-items: center;
   justify-content: center;
 }
@@ -362,3 +382,4 @@ function deleteItem(id) {
   border-radius: 8px;
 }
 </style>
+
