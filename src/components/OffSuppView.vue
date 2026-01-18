@@ -129,7 +129,7 @@ function saveItem() {
 
     <!-- TITLE -->
     <div class="d-flex justify-content-between align-items-center mb-3">
-      <h4>{{ categoryName }}</h4>
+      <h4 class="fw-bold mb-0">Office Supplies</h4>
       <button class="btn btn-sm btn-primary" @click="openAddModal">
         + Add Item
       </button>
