@@ -50,6 +50,7 @@ let chartInstance = null
 onMounted(() => {
   const saved = localStorage.getItem(STORAGE_KEY)
   items.value = saved ? JSON.parse(saved) : []
+  window.addEventListener('storage', syncItems)
   renderChart()
 })
 
@@ -62,9 +63,6 @@ function syncItems(event) {
   }
 }
 
-onMounted(() => {
-  window.addEventListener('storage', syncItems)
-})
 
 onUnmounted(() => {
   window.removeEventListener('storage', syncItems)

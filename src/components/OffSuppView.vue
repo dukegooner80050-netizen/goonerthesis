@@ -30,12 +30,6 @@ const statusOptions = [
   'Ordered'
 ]
 
-/* LOAD DATA */
-onMounted(() => {
-  const saved = localStorage.getItem(STORAGE_KEY)
-  items.value = saved ? JSON.parse(saved) : []
-})
-
 /* AUTO-SYNC ACROSS PAGES */
 function syncItems(event) {
   if (event.key === STORAGE_KEY) {
@@ -50,6 +44,7 @@ onMounted(() => {
   items.value = saved ? JSON.parse(saved) : []
   window.addEventListener('storage', syncItems)
 })
+
 
 onUnmounted(() => {
   window.removeEventListener('storage', syncItems)
@@ -171,31 +166,30 @@ function saveItem() {
           <tbody>
             <tr v-for="item in categoryItems" :key="item.id">
               <td>{{ item.name }}</td>
-              <td>{{ item.size || '-' }}</td>
 
-              <td>
-                <span
-                  class="badge"
-                  :class="{
-                    'bg-success': item.status === 'In stock',
-                    'bg-warning text-dark': item.status === 'Low stock',
-                    'bg-danger': item.status === 'Out of stock',
-                    'bg-info text-dark': item.status === 'Reserved',
-                    'bg-secondary': item.status === 'Ordered'
-                  }"
-                >
-                  {{ item.status }}
-                </span>
-              </td>
+              <td>{{ item.name }}</td>
 
-              <td>{{ item.quantity }}</td>
+<td>
+  <span class="badge" :class="{
+    'bg-success': item.status === 'In stock',
+    'bg-warning text-dark': item.status === 'Low stock',
+    'bg-danger': item.status === 'Out of stock',
+    'bg-info text-dark': item.status === 'Reserved',
+    'bg-secondary': item.status === 'Ordered'
+  }">
+    {{ item.status }}
+  </span>
+</td>
 
-              <td>
-                {{ Number(item.price).toLocaleString(undefined, {
-                  style: 'currency',
-                  currency: 'PHP'
-                }) }}
-              </td>
+<td>{{ item.quantity }}</td>
+
+<td>
+  {{ Number(item.price).toLocaleString(undefined, {
+    style: 'currency',
+    currency: 'PHP'
+  }) }}
+</td>
+
 
               <td>
                 <button
